@@ -18,6 +18,7 @@ const HEADING_LINES = [
 
 export function TextParallaxSection() {
   const sectionRef = useRef<HTMLElement>(null);
+  const pinRef = useRef<HTMLDivElement>(null);
   const orbOneRef = useRef<HTMLDivElement>(null);
   const orbTwoRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
@@ -31,6 +32,7 @@ export function TextParallaxSection() {
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
+    const pin = pinRef.current;
     const orbOne = orbOneRef.current;
     const orbTwo = orbTwoRef.current;
     const ring = ringRef.current;
@@ -44,6 +46,7 @@ export function TextParallaxSection() {
 
     if (
       !section ||
+      !pin ||
       !orbOne ||
       !orbTwo ||
       !ring ||
@@ -87,8 +90,8 @@ export function TextParallaxSection() {
           trigger: section,
           start: "top top",
           end: "+=180%",
-          pin: true,
-          pinSpacing: false,
+          pin: pin,
+          pinSpacing: true,
           scrub: 1.1,
           anticipatePin: 1,
           fastScrollEnd: true,
@@ -157,123 +160,134 @@ export function TextParallaxSection() {
     <section
       ref={sectionRef}
       aria-label="Nicakery scroll story"
-      className="parallax-stage relative z-20 flex h-dvh min-h-dvh items-center justify-center overflow-hidden bg-dark motion-reduce:h-auto motion-reduce:min-h-0 motion-reduce:bg-white motion-reduce:py-24"
+      className="relative bg-dark"
     >
       <div
-        ref={orbOneRef}
-        className="pointer-events-none absolute -left-[8%] top-[18%] h-[min(48vw,380px)] w-[min(48vw,380px)] rounded-full opacity-40 motion-reduce:hidden"
-        style={{
-          background:
-            "radial-gradient(circle, rgb(169 107 53 / 0.55) 0%, transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        ref={orbTwoRef}
-        className="pointer-events-none absolute -right-[6%] bottom-[12%] h-[min(42vw,320px)] w-[min(42vw,320px)] rounded-full opacity-35 motion-reduce:hidden"
-        style={{
-          background:
-            "radial-gradient(circle, rgb(59 36 22 / 0.65) 0%, transparent 70%)",
-        }}
-        aria-hidden="true"
-      />
-
-      <div
-        ref={ringRef}
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[min(68vw,480px)] w-[min(68vw,480px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 motion-reduce:hidden"
-        aria-hidden="true"
-      />
-
-      <div
-        ref={zoomGlowRef}
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[min(44vw,340px)] w-[min(44vw,340px)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 motion-reduce:hidden"
-        style={{
-          background:
-            "radial-gradient(circle, rgb(169 107 53 / 0.5) 0%, transparent 68%)",
-        }}
-        aria-hidden="true"
-      />
-
-      <p
-        ref={purelyRef}
-        className="absolute z-20 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50 motion-reduce:hidden"
+        ref={pinRef}
+        className="parallax-stage relative z-20 flex h-dvh min-h-dvh items-center justify-center overflow-hidden bg-dark motion-reduce:h-auto motion-reduce:min-h-0 motion-reduce:bg-white motion-reduce:py-24"
       >
-        Purely
-      </p>
+        <div
+          ref={orbOneRef}
+          className="pointer-events-none absolute -left-[8%] top-[18%] h-[min(48vw,380px)] w-[min(48vw,380px)] rounded-full opacity-40 motion-reduce:hidden"
+          style={{
+            background:
+              "radial-gradient(circle, rgb(169 107 53 / 0.55) 0%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          ref={orbTwoRef}
+          className="pointer-events-none absolute -right-[6%] bottom-[12%] h-[min(42vw,320px)] w-[min(42vw,320px)] rounded-full opacity-35 motion-reduce:hidden"
+          style={{
+            background:
+              "radial-gradient(circle, rgb(59 36 22 / 0.65) 0%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
 
-      <div
-        ref={zoomWrapRef}
-        className="absolute z-20 flex items-center justify-center px-6 motion-reduce:hidden"
-      >
-        <h2 className="text-center font-serif text-[clamp(3rem,11vw,8.5rem)] leading-[0.92] tracking-tight text-white italic">
-          {ZOOM_WORD}
-        </h2>
-      </div>
+        <div
+          ref={ringRef}
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[min(68vw,480px)] w-[min(68vw,480px)] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10 motion-reduce:hidden"
+          aria-hidden="true"
+        />
 
-      <p
-        ref={flashRef}
-        className="pointer-events-none absolute z-30 font-serif text-[clamp(2rem,7vw,5rem)] italic text-gold/75 motion-reduce:hidden"
-        aria-hidden="true"
-      >
-        golden · warm · fresh
-      </p>
+        <div
+          ref={zoomGlowRef}
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[min(44vw,340px)] w-[min(44vw,340px)] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 motion-reduce:hidden"
+          style={{
+            background:
+              "radial-gradient(circle, rgb(169 107 53 / 0.5) 0%, transparent 68%)",
+          }}
+          aria-hidden="true"
+        />
 
-      <CookieWipe cookieRef={cookieRef} />
+        <p
+          ref={purelyRef}
+          className="absolute z-20 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/50 motion-reduce:hidden"
+        >
+          Purely
+        </p>
 
-      <div
-        ref={panelRef}
-        className="absolute inset-0 z-50 flex min-h-dvh items-center justify-center bg-white px-6 opacity-0 motion-reduce:static motion-reduce:min-h-0 motion-reduce:opacity-100 md:px-10"
-      >
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="parallax-reveal-item text-[11px] font-semibold uppercase tracking-[0.35em] text-dark/45 motion-reduce:opacity-100">
-            The Nicakery Way
-          </p>
+        <div
+          ref={zoomWrapRef}
+          className="absolute z-20 flex items-center justify-center px-6 motion-reduce:hidden"
+        >
+          <h2 className="text-center font-serif text-[clamp(3rem,11vw,8.5rem)] leading-[0.92] tracking-tight text-white italic">
+            {ZOOM_WORD}
+          </h2>
+        </div>
 
-          <div
-            className="parallax-reveal-item mx-auto mt-6 h-px w-12 bg-dark/15 motion-reduce:opacity-100"
-            aria-hidden="true"
-          />
+        <p
+          ref={flashRef}
+          className="pointer-events-none absolute z-30 font-serif text-[clamp(2rem,7vw,5rem)] italic text-gold/75 motion-reduce:hidden"
+          aria-hidden="true"
+        >
+          golden · warm · fresh
+        </p>
 
-          <h3 className="mt-8 overflow-hidden font-serif text-[clamp(2rem,5vw,3.5rem)] leading-tight text-dark italic">
-            {HEADING_LINES.map((line) => (
-              <span key={line} className="block overflow-hidden py-0.5 motion-reduce:overflow-visible">
-                <span className="parallax-heading-line inline-block motion-reduce:translate-y-0">
-                  {line}
+        <CookieWipe cookieRef={cookieRef} />
+
+        <div
+          ref={panelRef}
+          className="absolute inset-0 z-50 flex min-h-dvh items-center justify-center bg-white px-6 opacity-0 motion-reduce:static motion-reduce:min-h-0 motion-reduce:opacity-100 md:px-10"
+        >
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="parallax-reveal-item text-[11px] font-semibold uppercase tracking-[0.35em] text-dark/45 motion-reduce:opacity-100">
+              The Nicakery Way
+            </p>
+
+            <div
+              className="parallax-reveal-item mx-auto mt-6 h-px w-12 bg-dark/15 motion-reduce:opacity-100"
+              aria-hidden="true"
+            />
+
+            <h3 className="mt-8 overflow-hidden font-serif text-[clamp(2rem,5vw,3.5rem)] leading-tight text-dark italic">
+              {HEADING_LINES.map((line) => (
+                <span
+                  key={line}
+                  className="block overflow-hidden py-0.5 motion-reduce:overflow-visible"
+                >
+                  <span className="parallax-heading-line inline-block motion-reduce:translate-y-0">
+                    {line}
+                  </span>
                 </span>
-              </span>
-            ))}
-          </h3>
+              ))}
+            </h3>
 
-          <p className="parallax-reveal-item mx-auto mt-8 max-w-md text-sm leading-relaxed text-dark/60 motion-reduce:opacity-100 md:text-base">
-            At Nicakery, patience is an ingredient. Every cookie is shaped by
-            hand, rested with care, and baked until the edges whisper golden
-            and the center stays impossibly soft.
-          </p>
+            <p className="parallax-reveal-item mx-auto mt-8 max-w-md text-sm leading-relaxed text-dark/60 motion-reduce:opacity-100 md:text-base">
+              At Nicakery, patience is an ingredient. Every cookie is shaped by
+              hand, rested with care, and baked until the edges whisper golden
+              and the center stays impossibly soft.
+            </p>
 
-          <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8">
-            {STATS.map((stat) => (
-              <div key={stat.label} className="parallax-stat motion-reduce:opacity-100">
-                <p className="font-serif text-2xl italic text-brown md:text-3xl">
-                  {stat.value}
-                </p>
-                <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-dark/45 md:text-xs">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
+            <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8">
+              {STATS.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="parallax-stat motion-reduce:opacity-100"
+                >
+                  <p className="font-serif text-2xl italic text-brown md:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-dark/45 md:text-xs">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div
-        ref={scrollHintRef}
-        className="absolute bottom-10 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-2 opacity-0 motion-reduce:hidden"
-        aria-hidden="true"
-      >
-        <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
-          Scroll
-        </span>
-        <div className="h-8 w-px bg-gradient-to-b from-white/40 to-transparent" />
+        <div
+          ref={scrollHintRef}
+          className="absolute bottom-10 left-1/2 z-50 flex -translate-x-1/2 flex-col items-center gap-2 opacity-0 motion-reduce:hidden"
+          aria-hidden="true"
+        >
+          <span className="text-[10px] font-medium uppercase tracking-[0.3em] text-white/40">
+            Scroll
+          </span>
+          <div className="h-8 w-px bg-gradient-to-b from-white/40 to-transparent" />
+        </div>
       </div>
     </section>
   );

@@ -1,21 +1,43 @@
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { menuCategories } from "@/data/menuCategories";
-import {
-  defaultViewport,
-  fadeUp,
-  staggerContainer,
-  staggerItem,
-} from "@/lib/animations";
+import { fadeUp } from "@/lib/animations";
+
+const menuViewport = {
+  once: true,
+  amount: "some" as const,
+};
+
+const menuStaggerContainer: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const menuCardItem: Variants = {
+  hidden: { y: 24 },
+  visible: {
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
 export function MenuPreviewSection() {
   return (
-    <section className="bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10 xl:px-14">
+    <section
+      id="collections"
+      className="relative z-10 bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10 xl:px-14"
+    >
       <div className="w-full">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={defaultViewport}
+          viewport={menuViewport}
           variants={fadeUp}
           className="mb-14 text-center md:text-left"
         >
@@ -30,17 +52,17 @@ export function MenuPreviewSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={defaultViewport}
-          variants={staggerContainer}
+          viewport={menuViewport}
+          variants={menuStaggerContainer}
           className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
           {menuCategories.map((category) => (
             <motion.article
               key={category.id}
-              variants={staggerItem}
-              className="group relative overflow-hidden"
+              variants={menuCardItem}
+              className="group overflow-hidden"
             >
-              <div className="aspect-[4/5] overflow-hidden">
+              <div className="relative aspect-[4/5] overflow-hidden">
                 <img
                   src={category.image}
                   alt={category.name}
@@ -48,21 +70,21 @@ export function MenuPreviewSection() {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-dark/70 via-dark/10 to-transparent transition-opacity duration-500 group-hover:from-dark/80" />
-              </div>
 
-              <div className="absolute inset-x-0 bottom-0 p-6 transition-transform duration-500 group-hover:-translate-y-1">
-                <div className="flex items-end justify-between gap-3">
-                  <div>
-                    <h3 className="font-serif text-2xl italic text-white">
-                      {category.name}
-                    </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-white/70 transition-colors group-hover:text-white/90">
-                      {category.description}
-                    </p>
+                <div className="absolute inset-x-0 bottom-0 p-6 transition-transform duration-500 group-hover:-translate-y-1">
+                  <div className="flex items-end justify-between gap-3">
+                    <div>
+                      <h3 className="font-serif text-2xl italic text-white">
+                        {category.name}
+                      </h3>
+                      <p className="mt-2 text-xs leading-relaxed text-white/70 transition-colors group-hover:text-white/90">
+                        {category.description}
+                      </p>
+                    </div>
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
+                      <ArrowUpRight className="h-4 w-4" />
+                    </span>
                   </div>
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
-                    <ArrowUpRight className="h-4 w-4" />
-                  </span>
                 </div>
               </div>
             </motion.article>

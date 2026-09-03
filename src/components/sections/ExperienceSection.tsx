@@ -19,7 +19,6 @@ export function ExperienceSection() {
 
     const ctx = gsap.context(() => {
       gsap.set(image, { scale: 1.08, yPercent: 0 });
-      gsap.set(content, { y: 0, opacity: 1 });
 
       gsap.fromTo(
         image,
@@ -62,7 +61,7 @@ export function ExperienceSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative -mt-px flex min-h-[70vh] items-center overflow-hidden bg-dark md:min-h-[80vh]"
+      className="relative z-10 -mt-px flex min-h-[70vh] items-center overflow-hidden bg-dark md:min-h-[80vh]"
     >
       <div ref={imageRef} className="absolute inset-0 will-change-transform">
         <img

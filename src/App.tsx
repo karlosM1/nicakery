@@ -18,10 +18,12 @@ function App() {
 
     const timer = window.setTimeout(refresh, 100);
     window.addEventListener("load", refresh);
+    window.addEventListener("resize", refresh);
 
     return () => {
       window.clearTimeout(timer);
       window.removeEventListener("load", refresh);
+      window.removeEventListener("resize", refresh);
     };
   }, []);
 

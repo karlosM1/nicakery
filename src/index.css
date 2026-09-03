@@ -49,6 +49,10 @@
     backface-visibility: hidden;
   }
 
+  section[aria-label="Nicakery scroll story"] .pin-spacer {
+    background-color: var(--color-white);
+  }
+
   #root,
   main {
     width: 100%;
