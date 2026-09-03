@@ -13,8 +13,8 @@ const STORY_IMAGE =
 
 export function OurStorySection() {
   return (
-    <section id="our-story" className="bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-20">
+    <section id="our-story" className="bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10 xl:px-14">
+      <div className="grid w-full items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <motion.div
           initial="hidden"
           whileInView="visible"

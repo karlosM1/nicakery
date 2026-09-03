@@ -7,8 +7,8 @@ export function FeaturedPastriesSection() {
   const remainingPastries = pastries.slice(4);
 
   return (
-    <section className="bg-cream/40 px-5 py-20 md:px-8 md:py-28 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-cream/40 px-5 py-20 md:px-8 md:py-28 lg:px-10 xl:px-14">
+      <div className="w-full">
         <motion.div
           initial="hidden"
           whileInView="visible"

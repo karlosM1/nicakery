@@ -14,8 +14,8 @@ export function OurCraftSection() {
   const featuredPastries = pastries.slice(0, 4);
 
   return (
-    <section className="bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10">
-      <div className="mx-auto max-w-7xl">
+    <section className="bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10 xl:px-14">
+      <div className="w-full">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <motion.p

@@ -32,7 +32,7 @@ export function Navbar() {
         )}
       >
         <nav
-          className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8 lg:px-10"
+          className="flex w-full items-center justify-between px-5 md:px-8 lg:px-10 xl:px-14"
           aria-label="Main navigation"
         >
           <a

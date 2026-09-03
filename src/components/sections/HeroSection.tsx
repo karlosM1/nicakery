@@ -1,15 +1,71 @@
+import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { fadeIn, fadeLeft, fadeRight, fadeUp, lineExpand } from "@/lib/animations";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=1920&h=1080&fit=crop&crop=entropy&q=85";
 
 export function HeroSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageWrapRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const section = sectionRef.current;
+    const imageWrap = imageWrapRef.current;
+    const content = contentRef.current;
+    if (!section || !imageWrap || prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      gsap.set(imageWrap, { yPercent: 0, scale: 1 });
+
+      gsap.fromTo(
+        imageWrap,
+        { yPercent: 0, scale: 1 },
+        {
+          yPercent: 15,
+          scale: 1.08,
+          ease: "none",
+          immediateRender: false,
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2,
+          },
+        },
+      );
+
+      if (content) {
+        gsap.fromTo(
+          content,
+          { y: 0, opacity: 1 },
+          {
+            y: -60,
+            opacity: 0.4,
+            ease: "none",
+            immediateRender: false,
+            scrollTrigger: {
+              trigger: section,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+          },
+        );
+      }
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="home"
-      className="relative flex min-h-screen flex-col justify-between overflow-hidden"
+      className="relative flex min-h-screen w-full flex-col justify-between overflow-hidden"
     >
       <motion.div
         className="absolute inset-0"
@@ -17,16 +73,21 @@ export function HeroSection() {
         animate={{ scale: 1 }}
         transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        <img
-          src={HERO_IMAGE}
-          alt="Artisan cookies cooling on a wooden rack in warm light"
-          className="h-full w-full object-cover object-center"
-        />
+        <div ref={imageWrapRef} className="h-full w-full will-change-transform">
+          <img
+            src={HERO_IMAGE}
+            alt="Artisan cookies cooling on a wooden rack in warm light"
+            className="h-full w-full object-cover object-center"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-dark/45 via-dark/15 to-dark/65" />
       </motion.div>
 
-      <div className="relative z-10 flex flex-1 flex-col justify-between px-5 pb-10 pt-28 md:px-8 md:pb-14 md:pt-32 lg:px-10 lg:pb-16">
-        <div className="mx-auto w-full max-w-7xl">
+      <div
+        ref={contentRef}
+        className="relative z-10 flex w-full flex-1 flex-col justify-between px-5 pb-10 pt-28 will-change-transform md:px-8 md:pb-14 md:pt-32 lg:px-10 lg:pb-16 xl:px-14"
+      >
+        <div className="w-full">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -45,7 +106,7 @@ export function HeroSection() {
               animate="visible"
               variants={fadeLeft}
               transition={{ delay: 0.4 }}
-              className="font-sans text-4xl font-semibold tracking-tight text-white xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-sans text-4xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
             >
               Purely
             </motion.h1>
@@ -70,7 +131,7 @@ export function HeroSection() {
               animate="visible"
               variants={fadeRight}
               transition={{ delay: 0.5 }}
-              className="font-serif text-4xl italic tracking-tight text-white xs:text-5xl sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-serif text-4xl italic tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
             >
               Handcrafted
             </motion.span>
@@ -87,7 +148,7 @@ export function HeroSection() {
           </motion.div>
         </div>
 
-        <div className="mx-auto mt-auto flex w-full max-w-7xl flex-col gap-8 md:flex-row md:items-end md:justify-between">
+        <div className="mt-auto flex w-full flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <motion.p
             initial="hidden"
             animate="visible"
