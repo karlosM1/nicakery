@@ -23,28 +23,28 @@ const STORY_WORKSHOP_IMAGE =
 
 const milestones = [
   {
-    year: "2018",
-    title: "A Small Kitchen Dream",
+    year: "Begin",
+    title: "A Love For Baking",
     description:
-      "Nicakery began in a home kitchen in Valenzuela, where late-night recipe tests and early morning bakes shaped our first signature cookie.",
+      "It started with a simple want to bake a cookie. Late nights in the kitchen, testing recipes until every batch felt warm, soft, and worth sharing.",
   },
   {
-    year: "2020",
-    title: "Opening Our Doors",
+    year: "The Idea",
+    title: "What If We Sold Them?",
     description:
-      "We opened our first shop in Manila City, welcoming neighbors with warm pastries and the smell of real butter filling the room.",
+      "Friends kept asking for more, and one question changed everything. What if we sold our cookies and brought that same joy to our community?",
   },
   {
-    year: "2023",
-    title: "Growing With Community",
+    year: "The Start",
+    title: "Building Nicakery",
     description:
-      "From weekend pop-ups to loyal regulars, our bakery grew through word of mouth and a shared love for honest, handcrafted baking.",
+      "We turned the idea into action and started our business in Valenzuela and Manila City, baking fresh cookies with real ingredients and honest care.",
   },
   {
     year: "Today",
-    title: "Still Handcrafted",
+    title: "Still Baking With Heart",
     description:
-      "Every batch is still folded, shaped, and finished by hand. We bake in small quantities so freshness never gets traded for speed.",
+      "Every day we scoop, bake, and serve cookies made the same way we started. Small batches, real flavor, and the same passion in every tin.",
   },
 ] as const;
 

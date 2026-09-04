@@ -8,7 +8,6 @@ import { FeaturedPastriesSection } from "@/components/sections/FeaturedPastriesS
 import { OurStorySection } from "@/components/sections/OurStorySection";
 import { TextParallaxSection } from "@/components/sections/TextParallaxSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { MenuPreviewSection } from "@/components/sections/MenuPreviewSection";
 
 export function HomePage() {
   useEffect(() => {
@@ -37,7 +36,6 @@ export function HomePage() {
         <OurStorySection />
         <TextParallaxSection />
         <ExperienceSection />
-        <MenuPreviewSection />
       </main>
       <Footer />
     </>
