@@ -89,6 +89,7 @@ export function MenuPage() {
             duration: 0.8,
             stagger: 0.12,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: categories,
               start: "top 85%",
@@ -110,6 +111,7 @@ export function MenuPage() {
             opacity: 1,
             duration: 0.9,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: section,
               start: "top 80%",
@@ -215,7 +217,7 @@ export function MenuPage() {
             {menuCategories.map((category) => (
               <article
                 key={category.id}
-                className="menu-category-card group overflow-hidden"
+                className="menu-category-card group overflow-hidden motion-reduce:opacity-100"
               >
                 <div className="relative aspect-[3/4] overflow-hidden sm:aspect-[4/5]">
                   <img

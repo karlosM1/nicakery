@@ -147,6 +147,7 @@ export function StoryPage() {
             duration: 0.8,
             stagger: 0.15,
             ease: "power3.out",
+            immediateRender: false,
             scrollTrigger: {
               trigger: values,
               start: "top 85%",
@@ -350,7 +351,7 @@ export function StoryPage() {
             {values.map((value) => (
               <article
                 key={value.title}
-                className="story-value-card rounded-2xl border border-dark/10 bg-background p-8"
+                className="story-value-card rounded-2xl border border-dark/10 bg-background p-8 motion-reduce:opacity-100"
               >
                 <h3 className="font-serif text-2xl italic text-dark">
                   {value.title}
