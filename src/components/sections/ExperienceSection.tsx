@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { scrollToElement } from "@/lib/scroll";
 
 const EXPERIENCE_IMAGE =
   "https://images.unsplash.com/photo-1737049282378-4bbf3f8ed360?w=1920&h=900&fit=crop&q=85";
@@ -86,6 +87,10 @@ export function ExperienceSection() {
           </p>
           <motion.a
             href="#menu"
+            onClick={(event) => {
+              event.preventDefault();
+              scrollToElement("menu");
+            }}
             className="group mt-10 inline-flex items-center gap-3 rounded-full border border-white/30 px-6 py-3 text-sm font-medium text-white transition-all hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
             whileHover={{ scale: 1.02 }}
           >

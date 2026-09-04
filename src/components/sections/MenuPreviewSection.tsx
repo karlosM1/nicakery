@@ -31,7 +31,7 @@ export function MenuPreviewSection() {
   return (
     <section
       id="collections"
-      className="relative z-10 bg-background px-5 py-20 md:px-8 md:py-28 lg:px-10 xl:px-14"
+      className="relative z-10 bg-background px-5 py-16 md:px-8 md:py-28 lg:px-10 xl:px-14"
     >
       <div className="w-full">
         <motion.div
@@ -44,7 +44,7 @@ export function MenuPreviewSection() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-dark/50">
             Our Menu
           </p>
-          <h2 className="mt-3 font-serif text-4xl italic text-dark md:text-5xl">
+          <h2 className="mt-3 font-serif text-3xl italic text-dark sm:text-4xl md:text-5xl">
             Curated Collections
           </h2>
         </motion.div>
@@ -54,7 +54,7 @@ export function MenuPreviewSection() {
           whileInView="visible"
           viewport={menuViewport}
           variants={menuStaggerContainer}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid grid-cols-1 gap-6 min-[480px]:grid-cols-2 lg:grid-cols-3"
         >
           {menuCategories.map((category) => (
             <motion.article
@@ -62,7 +62,7 @@ export function MenuPreviewSection() {
               variants={menuCardItem}
               className="group overflow-hidden"
             >
-              <div className="relative aspect-[4/5] overflow-hidden">
+              <div className="relative aspect-[3/4] overflow-hidden sm:aspect-[4/5]">
                 <img
                   src={category.image}
                   alt={category.name}
@@ -81,7 +81,7 @@ export function MenuPreviewSection() {
                         {category.description}
                       </p>
                     </div>
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/30 text-white opacity-100 transition-all duration-300 md:opacity-0 md:group-hover:opacity-100">
                       <ArrowUpRight className="h-4 w-4" />
                     </span>
                   </div>

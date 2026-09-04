@@ -52,7 +52,8 @@ export function SheetContent({ children, onClose, className }: SheetContentProps
   return (
     <motion.aside
       className={cn(
-        "fixed right-0 top-0 z-50 flex h-full w-[min(100%,320px)] flex-col bg-background px-6 py-8 shadow-2xl",
+        "fixed right-0 top-0 z-50 flex h-full w-[min(100%,320px)] flex-col bg-background px-6 pb-8 shadow-2xl",
+        "pt-[calc(2rem+env(safe-area-inset-top))]",
         className,
       )}
       initial={{ x: "100%" }}
@@ -65,7 +66,7 @@ export function SheetContent({ children, onClose, className }: SheetContentProps
       <button
         type="button"
         onClick={onClose}
-        className="absolute right-5 top-6 flex h-10 w-10 items-center justify-center rounded-full text-dark transition-colors hover:bg-dark/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
+        className="absolute right-5 top-[calc(1.5rem+env(safe-area-inset-top))] flex h-11 w-11 items-center justify-center rounded-full text-dark transition-colors hover:bg-dark/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
         aria-label="Close menu"
       >
         <X className="h-5 w-5" />

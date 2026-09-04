@@ -2,10 +2,9 @@ import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { fadeIn, fadeLeft, fadeRight, fadeUp, lineExpand } from "@/lib/animations";
+import { scrollToElement } from "@/lib/scroll";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
-
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=1920&h=1080&fit=crop&crop=entropy&q=85";
+import heroImage from "@/assets/cookies.jfif";
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -65,7 +64,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       id="home"
-      className="relative flex min-h-screen w-full flex-col justify-between overflow-hidden"
+      className="relative flex min-h-[100dvh] w-full flex-col justify-between overflow-hidden"
     >
       <motion.div
         className="absolute inset-0"
@@ -75,8 +74,8 @@ export function HeroSection() {
       >
         <div ref={imageWrapRef} className="h-full w-full will-change-transform">
           <img
-            src={HERO_IMAGE}
-            alt="Artisan cookies cooling on a wooden rack in warm light"
+            src={heroImage}
+            alt="Freshly baked chocolate chip cookies displayed on white pedestals"
             className="h-full w-full object-cover object-center"
           />
         </div>
@@ -85,7 +84,7 @@ export function HeroSection() {
 
       <div
         ref={contentRef}
-        className="relative z-10 flex w-full flex-1 flex-col justify-between px-5 pb-10 pt-28 will-change-transform md:px-8 md:pb-14 md:pt-32 lg:px-10 lg:pb-16 xl:px-14"
+        className="relative z-10 flex w-full flex-1 flex-col justify-between px-5 pb-10 pt-[max(7rem,calc(env(safe-area-inset-top)+5rem))] will-change-transform md:px-8 md:pb-14 md:pt-32 lg:px-10 lg:pb-16 xl:px-14"
       >
         <div className="w-full">
           <motion.div
@@ -106,7 +105,7 @@ export function HeroSection() {
               animate="visible"
               variants={fadeLeft}
               transition={{ delay: 0.4 }}
-              className="font-sans text-4xl font-semibold tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-sans text-5xl font-semibold tracking-tight text-white min-[480px]:text-6xl sm:text-6xl md:text-7xl lg:text-8xl"
             >
               Purely
             </motion.h1>
@@ -115,7 +114,7 @@ export function HeroSection() {
               initial="hidden"
               animate="visible"
               variants={lineExpand}
-              className="h-px w-16 origin-left bg-white/50 sm:w-24 md:hidden"
+              className="h-px w-24 origin-left bg-white/50 sm:w-28 md:hidden"
             />
 
             <motion.div
@@ -131,7 +130,7 @@ export function HeroSection() {
               animate="visible"
               variants={fadeRight}
               transition={{ delay: 0.5 }}
-              className="font-serif text-4xl italic tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-serif text-5xl italic tracking-tight text-white min-[480px]:text-6xl sm:text-6xl md:text-7xl lg:text-8xl"
             >
               Handcrafted
             </motion.span>
@@ -142,7 +141,7 @@ export function HeroSection() {
             animate="visible"
             variants={fadeIn}
             transition={{ delay: 0.6 }}
-            className="mt-6 text-[10px] font-semibold uppercase tracking-[0.35em] text-white/60 md:hidden"
+            className="mt-6 text-xs font-semibold uppercase tracking-[0.25em] text-white/70 min-[480px]:text-sm min-[480px]:tracking-[0.35em] md:hidden"
           >
             Nicakery · Artisan Pastries
           </motion.div>
@@ -168,12 +167,16 @@ export function HeroSection() {
           >
             <motion.a
               href="#menu"
-              className="group inline-flex items-center gap-3 rounded-full bg-white py-3 pl-6 pr-3 text-sm font-medium text-dark transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+              onClick={(event) => {
+                event.preventDefault();
+                scrollToElement("menu");
+              }}
+              className="group inline-flex min-h-11 w-full items-center rounded-full bg-white py-1.5 pl-6 pr-1.5 text-sm font-medium text-dark transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto sm:min-w-[220px]"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
               Explore Our Menu
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-dark text-white transition-transform duration-300 group-hover:translate-x-0.5">
+              <span className="ml-auto flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-dark text-white transition-transform duration-300 group-hover:translate-x-0.5">
                 <ArrowRight className="h-4 w-4" />
               </span>
             </motion.a>

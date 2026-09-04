@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { ShoppingBag } from "lucide-react";
-import { formatPrice } from "@/lib/utils";
 import type { Pastry } from "@/types/pastry";
 
 interface PastryCardProps {
@@ -19,34 +17,27 @@ export function PastryCard({ pastry }: PastryCardProps) {
         },
       }}
       whileHover={{ y: -4 }}
-      className="group"
+      className="group min-w-0"
     >
-      <div className="overflow-hidden bg-cream/60">
-        <div className="aspect-square overflow-hidden">
-          <img
-            src={pastry.image}
-            alt={pastry.name}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            loading="lazy"
-          />
-        </div>
+      <div className="aspect-square overflow-hidden">
+        <img
+          src={pastry.image}
+          alt={pastry.name}
+          className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+          loading="lazy"
+        />
       </div>
 
-      <div className="mt-5 space-y-1">
-        <h3 className="text-base font-medium tracking-tight text-dark">
+      <div className="mt-4 space-y-1 sm:mt-5">
+        <h3 className="line-clamp-2 text-sm font-medium leading-snug tracking-tight text-dark sm:text-base">
           {pastry.name}
         </h3>
-        <p className="text-sm font-semibold text-dark">{formatPrice(pastry.price)}</p>
+        {pastry.description && (
+          <p className="line-clamp-3 text-xs leading-relaxed text-dark/60 sm:text-sm">
+            {pastry.description}
+          </p>
+        )}
       </div>
-
-      <button
-        type="button"
-        className="mt-4 flex w-full items-center justify-between rounded-full border border-dark/15 px-5 py-3 text-sm font-medium text-dark transition-all duration-300 group-hover:border-dark group-hover:bg-dark group-hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/50"
-        aria-label={`Add ${pastry.name} to cart`}
-      >
-        <span>Add to Cart</span>
-        <ShoppingBag className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-      </button>
     </motion.article>
   );
 }

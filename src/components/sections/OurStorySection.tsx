@@ -1,12 +1,15 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import {
   defaultViewport,
   imageReveal,
   staggerContainer,
   staggerItem,
 } from "@/lib/animations";
+import { cn } from "@/lib/utils";
+import { prepareScrollForNavigation } from "@/lib/scroll";
 
 const STORY_IMAGE =
   "https://images.unsplash.com/photo-1737049282378-4bbf3f8ed360?w=900&h=1100&fit=crop&q=80";
@@ -61,10 +64,17 @@ export function OurStorySection() {
             detail is made with care.
           </motion.p>
           <motion.div variants={staggerItem} className="mt-8">
-            <Button variant="outline" className="gap-2 font-medium">
+            <Link
+              to="/story"
+              onClick={prepareScrollForNavigation}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "gap-2 font-medium",
+              )}
+            >
               Discover Our Story
               <ArrowUpRight className="h-4 w-4" />
-            </Button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

@@ -1,46 +1,64 @@
-import { useEffect } from "react";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
+import { useEffect, useLayoutEffect } from "react";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { ScrollTrigger } from "@/lib/gsap";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { OurCraftSection } from "@/components/sections/OurCraftSection";
-import { FeaturedPastriesSection } from "@/components/sections/FeaturedPastriesSection";
-import { OurStorySection } from "@/components/sections/OurStorySection";
-import { TextParallaxSection } from "@/components/sections/TextParallaxSection";
-import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { MenuPreviewSection } from "@/components/sections/MenuPreviewSection";
+import {
+  finalizeScrollAfterNavigation,
+  prepareScrollForNavigation,
+  scrollToHash,
+} from "@/lib/scroll";
+import { HomePage } from "@/pages/HomePage";
+import { MenuPage } from "@/pages/MenuPage";
+import { StoryPage } from "@/pages/StoryPage";
+import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
+
+function ScrollToTop() {
+  const { pathname, hash } = useLocation();
+
+  useLayoutEffect(() => {
+    if (!hash) {
+      prepareScrollForNavigation();
+    }
+  }, [pathname, hash]);
+
+  useEffect(() => {
+    const handleNavigationScroll = (): void => {
+      if (hash) {
+        ScrollTrigger.refresh();
+        scrollToHash(hash, "auto");
+      } else {
+        finalizeScrollAfterNavigation();
+      }
+    };
+
+    const frame = requestAnimationFrame(() => {
+      requestAnimationFrame(handleNavigationScroll);
+    });
+
+    return () => {
+      cancelAnimationFrame(frame);
+    };
+  }, [pathname, hash]);
+
+  return null;
+}
 
 function App() {
   useEffect(() => {
-    const refresh = (): void => {
-      ScrollTrigger.refresh();
-    };
-
-    const timer = window.setTimeout(refresh, 100);
-    window.addEventListener("load", refresh);
-    window.addEventListener("resize", refresh);
-
-    return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("load", refresh);
-      window.removeEventListener("resize", refresh);
-    };
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
   }, []);
 
   return (
-    <>
-      <Navbar />
-      <main className="w-full">
-        <HeroSection />
-        <OurCraftSection />
-        <FeaturedPastriesSection />
-        <OurStorySection />
-        <TextParallaxSection />
-        <ExperienceSection />
-        <MenuPreviewSection />
-      </main>
-      <Footer />
-    </>
+    <BrowserRouter>
+      <ScrollToTop />
+      <ScrollToTopButton />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/story" element={<StoryPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

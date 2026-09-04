@@ -260,7 +260,7 @@ export function TextParallaxSection() {
               and the center stays impossibly soft.
             </p>
 
-            <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8">
+            <div className="mt-10 grid grid-cols-3 gap-2 sm:gap-4 md:gap-8">
               {STATS.map((stat) => (
                 <div
                   key={stat.label}
