@@ -9,6 +9,7 @@ import {
 import { HomePage } from "@/pages/HomePage";
 import { MenuPage } from "@/pages/MenuPage";
 import { StoryPage } from "@/pages/StoryPage";
+import { TestPage } from "@/pages/TestPage";
 import { ScrollToTopButton } from "@/components/layout/ScrollToTopButton";
 
 function ScrollToTop() {
@@ -57,6 +58,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/menu" element={<MenuPage />} />
         <Route path="/story" element={<StoryPage />} />
+        <Route path="/test" element={<TestPage />} />
       </Routes>
     </BrowserRouter>
   );
